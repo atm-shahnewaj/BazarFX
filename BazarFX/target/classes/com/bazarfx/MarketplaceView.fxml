@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.bazarfx.controller.MarketplaceController" styleClass="main-container">
+    <left>
+        <VBox spacing="15" styleClass="sidebar">
+            <Label text="BazarFX" styleClass="app-logo"/>
+            <Button text="Browse Listings" styleClass="nav-btn-active" maxWidth="Infinity"/>
+            <Button text="Manage Orders" styleClass="nav-btn" maxWidth="Infinity" onAction="#handleRefreshOrders"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Label fx:id="exchangeRateLabel" text="Rates Syncing..." styleClass="status-text" wrapText="true"/>
+        </VBox>
+    </left>
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            <Tab text="Marketplace Grid">
+                <VBox spacing="15" style="-fx-padding: 20;">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <TextField fx:id="searchField" promptText="Search products..." HBox.hgrow="ALWAYS" onKeyReleased="#handleSearch"/>
+                        <ComboBox fx:id="currencyComboBox" prefWidth="120"/>
+                    </HBox>
+                    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                        <FlowPane fx:id="productGrid" hgap="15" vgap="15"/>
+                    </ScrollPane>
+                </VBox>
+            </Tab>
+            <Tab text="Add New Listing">
+                <VBox spacing="12" style="-fx-padding: 25;" maxWidth="500">
+                    <Label text="Post Product" styleClass="section-header"/>
+                    <TextField fx:id="titleInput" promptText="Product Title"/>
+                    <TextField fx:id="priceInput" promptText="Price (BDT)"/>
+                    <ComboBox fx:id="categoryInput" promptText="Category" maxWidth="Infinity"/>
+                    <ComboBox fx:id="conditionInput" promptText="Condition" maxWidth="Infinity"/>
+                    <TextField fx:id="locationInput" promptText="Location"/>
+                    <TextArea fx:id="descInput" promptText="Description..." prefRowCount="3"/>
+                    <Button text="Publish Product" onAction="#handleAddProduct" styleClass="btn-accent" maxWidth="Infinity"/>
+                </VBox>
+            </Tab>
+            <Tab text="Orders &amp; Backup">
+                <VBox spacing="15" style="-fx-padding: 20;">
+                    <HBox spacing="10">
+                        <Button text="Export Products (JSON)" onAction="#handleExportJson" styleClass="btn-secondary"/>
+                        <Button text="Run Async Analytics" onAction="#handleGenerateAnalytics" styleClass="btn-secondary"/>
+                        <Button text="Refresh Table" onAction="#handleRefreshOrders" styleClass="btn-secondary"/>
+                    </HBox>
+                    <TableView fx:id="ordersTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colOrderId" text="Order ID" prefWidth="80"/>
+                            <TableColumn fx:id="colProduct" text="Product Title" prefWidth="250"/>
+                            <TableColumn fx:id="colPrice" text="Total (BDT)" prefWidth="120"/>
+                            <TableColumn fx:id="colStatus" text="Live Status" prefWidth="150"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+    <bottom>
+        <HBox styleClass="footer-bar">
+            <Label fx:id="statusLabel" text="Ready." styleClass="status-label"/>
+        </HBox>
+    </bottom>
+</BorderPane>

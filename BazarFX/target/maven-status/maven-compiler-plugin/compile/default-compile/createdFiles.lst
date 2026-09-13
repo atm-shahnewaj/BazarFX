@@ -1,0 +1,11 @@
+com\bazarfx\dao\OrderDao.class
+com\bazarfx\concurrency\OrderStatusSimulator.class
+com\bazarfx\MainApp.class
+com\bazarfx\concurrency\ExchangeRateFetcher.class
+com\bazarfx\dao\ProductDao.class
+com\bazarfx\model\Order.class
+com\bazarfx\service\JsonBackupService.class
+com\bazarfx\concurrency\ReportGenerator.class
+com\bazarfx\controller\MarketplaceController.class
+com\bazarfx\dao\DatabaseManager.class
+com\bazarfx\model\Product.class
