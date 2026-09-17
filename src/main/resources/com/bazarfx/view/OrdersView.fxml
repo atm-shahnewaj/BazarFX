@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="16" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.bazarfx.controller.OrdersController">
+    <padding><Insets top="20" right="28" bottom="20" left="28"/></padding>
+
+    <VBox spacing="2" styleClass="page-header">
+        <Label text="Your Orders" styleClass="section-title"/>
+        <Label text="Track every purchase from pending to delivered" styleClass="page-subtext"/>
+    </VBox>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="edge-to-edge">
+        <VBox fx:id="ordersBox" spacing="12"/>
+    </ScrollPane>
+</VBox>

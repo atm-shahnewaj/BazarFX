@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="16" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.bazarfx.controller.SellerDashboardController">
+    <padding><Insets top="20" right="28" bottom="20" left="28"/></padding>
+
+    <VBox spacing="2" styleClass="page-header">
+        <Label text="Seller Dashboard" styleClass="section-title"/>
+        <Label text="Your listings, views and simulated revenue at a glance" styleClass="page-subtext"/>
+    </VBox>
+
+    <HBox spacing="20" styleClass="stats-bar">
+        <VBox alignment="CENTER" spacing="4" styleClass="stat-box" HBox.hgrow="ALWAYS">
+            <Label text="Total Listings" styleClass="stat-label"/>
+            <Label fx:id="totalListingsLabel" styleClass="stat-value"/>
+        </VBox>
+        <VBox alignment="CENTER" spacing="4" styleClass="stat-box" HBox.hgrow="ALWAYS">
+            <Label text="Total Views" styleClass="stat-label"/>
+            <Label fx:id="totalViewsLabel" styleClass="stat-value"/>
+        </VBox>
+        <VBox alignment="CENTER" spacing="4" styleClass="stat-box" HBox.hgrow="ALWAYS">
+            <Label text="Simulated Revenue" styleClass="stat-label"/>
+            <Label fx:id="revenueLabel" styleClass="stat-value"/>
+        </VBox>
+    </HBox>
+
+    <Label text="My Listings" styleClass="section-subtitle"/>
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="edge-to-edge">
+        <VBox fx:id="listingsBox" spacing="10"/>
+    </ScrollPane>
+</VBox>

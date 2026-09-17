@@ -1,0 +1,477 @@
+/* =========================================================================
+   BazarFX design system
+   All sizes below the top-level -fx-font-size are expressed in "em" so that
+   the whole UI scales when SceneRouter updates the root font-size in
+   response to the window being resized (see SceneRouter.bindResponsive).
+   ========================================================================= */
+
+.root {
+    /* ---- palette (custom looked-up properties) ---- */
+    -bg-app-1: #eef3fc;
+    -bg-app-2: #e3ecfb;
+    -surface: #ffffff;
+    -surface-alt: #f5f8fd;
+    -surface-border: #e1e8f5;
+
+    -primary: #2f6fed;
+    -primary-dark: #1c4fc4;
+    -primary-light: #e8f0ff;
+    -accent: #12b886;
+    -accent-dark: #0a9a70;
+    -warn: #f2994a;
+    -danger: #e5484d;
+
+    -text-strong: #101a33;
+    -text-body: #3c485c;
+    -text-muted: #7c8797;
+    -text-on-dark: #f4f7fd;
+    -text-on-dark-muted: #aab6cc;
+
+    -fx-font-family: "Segoe UI Semibold", "Segoe UI", "Inter", "Helvetica Neue", Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: -text-body;
+    -fx-background-color: linear-gradient(to bottom right, -bg-app-1, -bg-app-2);
+}
+
+.label {
+    -fx-text-fill: -text-body;
+}
+
+/* Utility: strip the default white chrome off a ScrollPane so the page
+   background shows through edge-to-edge. */
+.edge-to-edge, .edge-to-edge > .viewport {
+    -fx-background-color: transparent;
+}
+.edge-to-edge {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+.edge-to-edge .scroll-bar:vertical,
+.edge-to-edge .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+/* ---------- Auth screens (Login / Signup) ---------- */
+.auth-root {
+    -fx-background-color:
+        radial-gradient(center 12% 8%, radius 55%, rgba(255,255,255,0.14), transparent),
+        radial-gradient(center 90% 88%, radius 60%, rgba(18,184,134,0.28), transparent),
+        linear-gradient(to bottom right, #16213e, #0f1b33 45%, #142944);
+}
+.auth-card {
+    -fx-background-color: rgba(255,255,255,0.98);
+    -fx-background-radius: 20;
+    -fx-padding: 2.2em 2.4em;
+    -fx-effect: dropshadow(gaussian, rgba(4,10,30,0.45), 40, 0, 0, 18);
+}
+.auth-logo-badge {
+    -fx-background-color: linear-gradient(to bottom right, -primary, -accent);
+    -fx-background-radius: 16;
+    -fx-min-width: 2.6em;
+    -fx-min-height: 2.6em;
+    -fx-max-width: 2.6em;
+    -fx-max-height: 2.6em;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(47,111,237,0.55), 18, 0, 0, 6);
+}
+.auth-logo-glyph {
+    -fx-text-fill: white;
+    -fx-font-size: 1.35em;
+    -fx-font-weight: bold;
+}
+.brand-title {
+    -fx-font-size: 2.3em;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-on-dark;
+}
+.brand-title-dark {
+    -fx-font-size: 1.55em;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-strong;
+}
+.brand-subtitle {
+    -fx-font-size: 1em;
+    -fx-text-fill: -text-on-dark-muted;
+}
+.field-label {
+    -fx-font-size: 0.85em;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-muted;
+}
+.error-label {
+    -fx-text-fill: -danger;
+    -fx-font-size: 0.9em;
+}
+.auth-switch-link {
+    -fx-text-fill: -primary;
+    -fx-font-size: 0.92em;
+}
+
+/* ---------- Text fields / combos / spinners / text areas ---------- */
+.text-field, .password-field, .combo-box, .text-area, .spinner {
+    -fx-background-color: -surface-alt;
+    -fx-background-radius: 10;
+    -fx-border-color: -surface-border;
+    -fx-border-radius: 10;
+    -fx-border-width: 1.2;
+    -fx-font-size: 1em;
+    -fx-padding: 0.55em 0.7em;
+}
+.text-area {
+    -fx-padding: 0;
+}
+.text-area .content {
+    -fx-background-color: -surface-alt;
+    -fx-background-radius: 10;
+    -fx-padding: 0.55em 0.7em;
+}
+.text-field:focused, .password-field:focused, .combo-box:focused,
+.text-area:focused, .spinner:focused {
+    -fx-border-color: -primary;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(47,111,237,0.22), 8, 0, 0, 0);
+}
+.combo-box .list-cell {
+    -fx-padding: 0.35em 0.5em;
+    -fx-text-fill: -text-body;
+}
+.spinner .increment-arrow-button, .spinner .decrement-arrow-button {
+    -fx-background-color: -primary-light;
+}
+
+/* ---------- Buttons ---------- */
+.button {
+    -fx-background-radius: 10;
+    -fx-font-size: 1em;
+    -fx-padding: 0.55em 1.1em;
+    -fx-cursor: hand;
+}
+.primary-button {
+    -fx-background-color: linear-gradient(to bottom right, -primary, -primary-dark);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 0.65em 1.4em;
+    -fx-effect: dropshadow(gaussian, rgba(47,111,237,0.35), 14, 0, 0, 5);
+}
+.primary-button:hover {
+    -fx-background-color: linear-gradient(to bottom right, #4a83f0, -primary);
+}
+.primary-button:pressed, .primary-button:armed {
+    -fx-background-color: -primary-dark;
+    -fx-effect: none;
+}
+.primary-button:disabled {
+    -fx-opacity: 0.55;
+    -fx-effect: none;
+}
+
+.secondary-button {
+    -fx-background-color: -primary-light;
+    -fx-text-fill: -primary-dark;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 0.6em 1.2em;
+    -fx-border-color: transparent;
+}
+.secondary-button:hover {
+    -fx-background-color: derive(-primary-light, -6%);
+}
+.secondary-button:pressed, .secondary-button:armed {
+    -fx-background-color: derive(-primary-light, -14%);
+}
+
+.ghost-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -text-body;
+    -fx-font-weight: bold;
+    -fx-border-color: -surface-border;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 0.6em 1.2em;
+}
+.ghost-button:hover {
+    -fx-background-color: -surface-alt;
+    -fx-border-color: -primary;
+}
+
+.danger-button {
+    -fx-background-color: rgba(229,72,77,0.12);
+    -fx-text-fill: -danger;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 0.6em 1.2em;
+}
+.danger-button:hover {
+    -fx-background-color: rgba(229,72,77,0.22);
+}
+
+.icon-button {
+    -fx-background-color: -surface-alt;
+    -fx-background-radius: 10;
+    -fx-padding: 0.5em 0.7em;
+    -fx-font-size: 1em;
+}
+.icon-button:hover {
+    -fx-background-color: -primary-light;
+}
+
+.hyperlink {
+    -fx-text-fill: -primary;
+    -fx-font-size: 0.95em;
+}
+.hyperlink:visited { -fx-text-fill: -primary; }
+
+/* ---------- Nav shell ---------- */
+.nav-bar {
+    -fx-background-color: linear-gradient(to right, #101a33, #16213e 55%, #142944);
+    -fx-effect: dropshadow(gaussian, rgba(4,10,30,0.35), 14, 0, 0, 4);
+}
+.nav-logo-badge {
+    -fx-background-color: linear-gradient(to bottom right, -primary, -accent);
+    -fx-background-radius: 10;
+    -fx-min-width: 2em;
+    -fx-min-height: 2em;
+    -fx-max-width: 2em;
+    -fx-max-height: 2em;
+    -fx-alignment: center;
+}
+.nav-logo-glyph {
+    -fx-text-fill: white;
+    -fx-font-size: 1.05em;
+    -fx-font-weight: bold;
+}
+.nav-brand {
+    -fx-text-fill: -text-on-dark;
+    -fx-font-size: 1.3em;
+    -fx-font-weight: bold;
+    -fx-padding: 0 1.2em 0 0.4em;
+}
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -text-on-dark-muted;
+    -fx-font-size: 0.98em;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 0.55em 0.9em;
+}
+.nav-button:hover {
+    -fx-text-fill: white;
+    -fx-background-color: rgba(255,255,255,0.08);
+}
+.nav-button-active {
+    -fx-text-fill: white;
+    -fx-background-color: rgba(47,111,237,0.35);
+}
+.nav-logout-button {
+    -fx-background-color: rgba(229,72,77,0.16);
+    -fx-text-fill: #ffb3b5;
+    -fx-font-size: 0.95em;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 0.5em 1em;
+}
+.nav-logout-button:hover {
+    -fx-background-color: rgba(229,72,77,0.3);
+    -fx-text-fill: white;
+}
+.nav-welcome {
+    -fx-text-fill: -text-on-dark-muted;
+    -fx-font-size: 0.92em;
+    -fx-padding: 0 0.8em 0 0;
+}
+.toast-label {
+    -fx-background-color: linear-gradient(to right, #fff4de, #ffe9c2);
+    -fx-text-fill: #8a5a10;
+    -fx-font-weight: bold;
+    -fx-padding: 0.5em 1.3em;
+    -fx-font-size: 0.92em;
+}
+
+/* ---------- Browse / filter bar / cards ---------- */
+.filter-bar {
+    -fx-background-color: -surface;
+    -fx-padding: 0.9em 1em;
+    -fx-background-radius: 14;
+    -fx-border-color: -surface-border;
+    -fx-border-radius: 14;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(16,26,51,0.06), 10, 0, 0, 3);
+}
+.result-count {
+    -fx-text-fill: -text-muted;
+    -fx-font-size: 0.88em;
+}
+.product-card {
+    -fx-background-color: -surface;
+    -fx-background-radius: 16;
+    -fx-padding: 1em;
+    -fx-spacing: 0.4em;
+    -fx-cursor: hand;
+    -fx-pref-width: 15.5em;
+    -fx-border-color: -surface-border;
+    -fx-border-radius: 16;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(16,26,51,0.07), 10, 0, 0, 4);
+}
+.product-card:hover {
+    -fx-border-color: -primary;
+    -fx-effect: dropshadow(gaussian, rgba(47,111,237,0.22), 16, 0, 0, 6);
+    -fx-translate-y: -2;
+}
+.card-thumb {
+    -fx-background-color: -primary-light;
+    -fx-background-radius: 12;
+    -fx-min-height: 7.5em;
+    -fx-pref-height: 7.5em;
+}
+.card-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 1.05em;
+    -fx-text-fill: -text-strong;
+}
+.card-price {
+    -fx-text-fill: -primary-dark;
+    -fx-font-weight: bold;
+    -fx-font-size: 1.05em;
+}
+.card-meta {
+    -fx-text-fill: -text-muted;
+    -fx-font-size: 0.85em;
+}
+.card-badge {
+    -fx-background-color: -primary-light;
+    -fx-text-fill: -primary-dark;
+    -fx-font-size: 0.78em;
+    -fx-font-weight: bold;
+    -fx-padding: 0.25em 0.6em;
+    -fx-background-radius: 20;
+}
+
+/* ---------- Page headers / detail / form screens ---------- */
+.page-header {
+    -fx-padding: 0 0 0.2em 0;
+}
+.section-title {
+    -fx-font-size: 1.7em;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-strong;
+}
+.section-subtitle {
+    -fx-font-size: 1.1em;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-strong;
+}
+.page-subtext {
+    -fx-text-fill: -text-muted;
+    -fx-font-size: 0.92em;
+}
+.form-card, .detail-card {
+    -fx-background-color: -surface;
+    -fx-background-radius: 18;
+    -fx-padding: 1.6em;
+    -fx-border-color: -surface-border;
+    -fx-border-radius: 18;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(16,26,51,0.06), 14, 0, 0, 4);
+}
+.detail-title {
+    -fx-font-size: 1.9em;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-strong;
+}
+.detail-photo {
+    -fx-background-color: -primary-light;
+    -fx-background-radius: 16;
+    -fx-min-height: 16em;
+    -fx-pref-height: 16em;
+    -fx-max-height: 20em;
+    -fx-alignment: center;
+}
+.detail-price {
+    -fx-font-size: 1.5em;
+    -fx-text-fill: -primary-dark;
+    -fx-font-weight: bold;
+}
+.detail-meta, .detail-seller, .detail-views {
+    -fx-text-fill: -text-muted;
+    -fx-font-size: 0.95em;
+}
+.detail-description {
+    -fx-font-size: 1em;
+    -fx-text-fill: -text-body;
+    -fx-line-spacing: 3px;
+}
+.status-label {
+    -fx-text-fill: -accent-dark;
+    -fx-font-size: 0.92em;
+    -fx-font-weight: bold;
+}
+.field-hint {
+    -fx-text-fill: -text-muted;
+    -fx-font-size: 0.88em;
+}
+
+/* ---------- Cart / Orders / Dashboard rows ---------- */
+.cart-row, .order-card, .dashboard-row {
+    -fx-background-color: -surface;
+    -fx-background-radius: 14;
+    -fx-padding: 0.9em 1.1em;
+    -fx-border-color: -surface-border;
+    -fx-border-radius: 14;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(16,26,51,0.05), 8, 0, 0, 2);
+}
+.order-header {
+    -fx-font-weight: bold;
+    -fx-font-size: 1.02em;
+    -fx-text-fill: -text-strong;
+}
+.cart-total-bar {
+    -fx-background-color: -surface;
+    -fx-background-radius: 14;
+    -fx-padding: 1em 1.3em;
+    -fx-border-color: -surface-border;
+    -fx-border-radius: 14;
+    -fx-border-width: 1;
+}
+
+/* ---------- Dashboard stats ---------- */
+.stats-bar {
+    -fx-padding: 0.6em 0 0.6em 0;
+}
+.stat-box {
+    -fx-background-color: linear-gradient(to bottom right, -surface, -surface-alt);
+    -fx-background-radius: 16;
+    -fx-padding: 1.1em 1.4em;
+    -fx-min-width: 11.5em;
+    -fx-border-color: -surface-border;
+    -fx-border-radius: 16;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(16,26,51,0.06), 8, 0, 0, 3);
+}
+.stat-label {
+    -fx-text-fill: -text-muted;
+    -fx-font-size: 0.85em;
+    -fx-font-weight: bold;
+}
+.stat-value {
+    -fx-font-size: 1.7em;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-strong;
+}
+
+/* ---------- Reports ---------- */
+.report-column {
+    -fx-background-color: -surface;
+    -fx-background-radius: 16;
+    -fx-padding: 1.1em;
+    -fx-min-width: 16em;
+    -fx-border-color: -surface-border;
+    -fx-border-radius: 16;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(16,26,51,0.06), 8, 0, 0, 3);
+}
+.progress-indicator {
+    -fx-progress-color: -primary;
+}

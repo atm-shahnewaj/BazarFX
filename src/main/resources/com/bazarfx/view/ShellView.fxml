@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml" fx:controller="com.bazarfx.controller.ShellController">
+    <top>
+        <VBox>
+            <HBox alignment="CENTER_LEFT" spacing="6" styleClass="nav-bar">
+                <padding><Insets top="12" right="20" bottom="12" left="20"/></padding>
+
+                <StackPane styleClass="nav-logo-badge">
+                    <Label text="B" styleClass="nav-logo-glyph"/>
+                </StackPane>
+                <Label text="BazarFX" styleClass="nav-brand"/>
+
+                <Button text="Browse" onAction="#onBrowse" styleClass="nav-button"/>
+                <Button text="Sell an Item" onAction="#onSell" styleClass="nav-button"/>
+                <Button text="Cart" onAction="#onCart" styleClass="nav-button"/>
+                <Button text="Orders" onAction="#onOrders" styleClass="nav-button"/>
+                <Button text="Dashboard" onAction="#onDashboard" styleClass="nav-button"/>
+                <Button text="Reports" onAction="#onReports" styleClass="nav-button"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Label fx:id="welcomeLabel" styleClass="nav-welcome"/>
+                <Button text="Log Out" onAction="#onLogout" styleClass="nav-logout-button"/>
+            </HBox>
+            <Label fx:id="toastLabel" styleClass="toast-label" maxWidth="Infinity"/>
+        </VBox>
+    </top>
+</BorderPane>

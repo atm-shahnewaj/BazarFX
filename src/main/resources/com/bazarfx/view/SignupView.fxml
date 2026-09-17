@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml" fx:controller="com.bazarfx.controller.SignupController"
+           styleClass="auth-root">
+    <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+    <ScrollPane fitToWidth="true" styleClass="edge-to-edge" maxWidth="460">
+        <VBox alignment="CENTER" spacing="18">
+            <padding><Insets top="18" right="4" bottom="18" left="4"/></padding>
+
+            <StackPane styleClass="auth-logo-badge">
+                <Label text="B" styleClass="auth-logo-glyph"/>
+            </StackPane>
+            <VBox alignment="CENTER" spacing="4">
+                <Label text="Create your BazarFX account" styleClass="brand-title" wrapText="true" textAlignment="CENTER"/>
+                <Label text="Buy and sell locally, entirely offline" styleClass="brand-subtitle"/>
+            </VBox>
+
+            <VBox spacing="12" maxWidth="380" styleClass="auth-card">
+                <VBox spacing="4">
+                    <Label text="USERNAME" styleClass="field-label"/>
+                    <TextField fx:id="usernameField" promptText="Choose a username"/>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="EMAIL" styleClass="field-label"/>
+                    <TextField fx:id="emailField" promptText="you@example.com"/>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="PHONE" styleClass="field-label"/>
+                    <TextField fx:id="phoneField" promptText="e.g. 01XXXXXXXXX"/>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="LOCATION" styleClass="field-label"/>
+                    <TextField fx:id="locationField" promptText="City / area"/>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="PASSWORD" styleClass="field-label"/>
+                    <PasswordField fx:id="passwordField" promptText="Create a password"/>
+                </VBox>
+                <Button text="Sign Up" onAction="#onSignup" defaultButton="true" maxWidth="Infinity" styleClass="primary-button"/>
+                <Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
+                <Separator/>
+                <Hyperlink text="Already have an account? Log in" onAction="#onGoToLogin" styleClass="auth-switch-link"/>
+            </VBox>
+        </VBox>
+    </ScrollPane>
+</StackPane>

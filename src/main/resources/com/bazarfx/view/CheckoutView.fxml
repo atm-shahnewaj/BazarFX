@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="16" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.bazarfx.controller.CheckoutController">
+    <padding><Insets top="20" right="28" bottom="20" left="28"/></padding>
+
+    <VBox spacing="2" styleClass="page-header">
+        <Label text="Checkout" styleClass="section-title"/>
+        <Label text="Simulated payment - no real charge is made" styleClass="page-subtext"/>
+    </VBox>
+
+    <VBox spacing="14" styleClass="form-card" maxWidth="560">
+        <VBox fx:id="summaryBox" spacing="6"/>
+        <Separator/>
+        <Label fx:id="totalLabel" styleClass="detail-price"/>
+        <Button text="Confirm Payment (simulated)" onAction="#onConfirmPayment" maxWidth="Infinity" styleClass="primary-button"/>
+        <Label fx:id="confirmationLabel" styleClass="status-label" wrapText="true"/>
+    </VBox>
+</VBox>
