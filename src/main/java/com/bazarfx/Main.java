@@ -16,6 +16,7 @@ public class Main extends Application {
         ctx.startBackgroundServices();
 
         ctx.router.showAuthScreen("LoginView.fxml", "BazarFX - Login");
+        primaryStage.setMaximized(true);
 
         primaryStage.setOnCloseRequest(e -> ctx.shutdownBackgroundServices());
     }

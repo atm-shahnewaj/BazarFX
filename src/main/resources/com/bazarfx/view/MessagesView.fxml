@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="14" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.bazarfx.controller.MessagesController">
+    <padding><Insets top="20" right="28" bottom="20" left="28"/></padding>
+
+    <VBox spacing="2" styleClass="page-header">
+        <Label text="Messages" styleClass="section-title"/>
+        <Label text="Chat with buyers and sellers about a specific listing" styleClass="page-subtext"/>
+    </VBox>
+
+    <SplitPane dividerPositions="0.32" VBox.vgrow="ALWAYS" styleClass="messages-split">
+        <ScrollPane fitToWidth="true" styleClass="edge-to-edge">
+            <VBox fx:id="conversationList" spacing="6"/>
+        </ScrollPane>
+
+        <VBox spacing="10" styleClass="chat-panel">
+            <Label fx:id="chatHeader" text="Select a conversation" styleClass="section-subtitle" wrapText="true"/>
+            <ScrollPane fx:id="chatScroll" fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="edge-to-edge">
+                <VBox fx:id="chatBox" spacing="8">
+                    <padding><Insets top="6" right="6" bottom="6" left="6"/></padding>
+                </VBox>
+            </ScrollPane>
+            <Label fx:id="emptyStateLabel" text="Open a conversation on the left, or message a seller from any listing."
+                   styleClass="page-subtext" wrapText="true"/>
+            <HBox spacing="10" alignment="CENTER">
+                <TextField fx:id="messageField" promptText="Type a message…" HBox.hgrow="ALWAYS" onAction="#onSend"/>
+                <Button fx:id="sendButton" text="Send" onAction="#onSend" styleClass="primary-button"/>
+            </HBox>
+        </VBox>
+    </SplitPane>
+</VBox>

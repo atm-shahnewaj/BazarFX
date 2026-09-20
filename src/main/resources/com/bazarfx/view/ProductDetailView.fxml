@@ -13,6 +13,10 @@
         <StackPane fx:id="photoBox" styleClass="detail-photo" managed="false" visible="false">
             <ImageView fx:id="photoView" preserveRatio="true" smooth="true"/>
         </StackPane>
+        <ScrollPane fx:id="thumbStripScroll" fitToHeight="true" hbarPolicy="AS_NEEDED" vbarPolicy="NEVER"
+                    styleClass="edge-to-edge" managed="false" visible="false">
+            <HBox fx:id="thumbStrip" spacing="10"/>
+        </ScrollPane>
 
         <Label fx:id="titleLabel" styleClass="detail-title" wrapText="true"/>
         <Label fx:id="priceLabel" styleClass="detail-price"/>
@@ -27,6 +31,7 @@
             <Spinner fx:id="quantitySpinner" editable="true" prefWidth="90"/>
             <Button text="Add to Cart" onAction="#onAddToCart" styleClass="primary-button"/>
             <Button text="Save to Wishlist" onAction="#onAddToWishlist" styleClass="secondary-button"/>
+            <Button text="💬 Message Seller" onAction="#onMessageSeller" styleClass="ghost-button"/>
         </HBox>
         <Label fx:id="statusLabel" styleClass="status-label"/>
     </VBox>

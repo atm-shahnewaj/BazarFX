@@ -1,6 +1,7 @@
 package com.bazarfx;
 
 import com.bazarfx.concurrency.*;
+import com.bazarfx.notification.OrderStatusNotification;
 import com.bazarfx.service.*;
 import com.bazarfx.storage.FileStorageManager;
 
@@ -19,6 +20,7 @@ public class AppContext {
     public final OrderService orderService;
     public final ReviewService reviewService;
     public final ReportService reportService;
+    public final MessagingService messagingService;
 
     public final ImageProcessor imageProcessor;
     public final SearchIndex searchIndex;
@@ -38,16 +40,16 @@ public class AppContext {
         orderService = new OrderService(storage);
         reviewService = new ReviewService(storage);
         reportService = new ReportService(storage);
+        messagingService = new MessagingService(storage);
 
         imageProcessor = new ImageProcessor(storage);
         searchIndex = new SearchIndex(storage);
         notificationPoller = new NotificationPoller(event -> {
-            System.out.println("[Notification] " + event.message);
-            if (shellController != null) shellController.showToast(event.message);
+            System.out.println("[Notification] " + event.getMessage());
+            if (shellController != null) shellController.showToast(event);
         });
         orderStatusSimulator = new OrderStatusSimulator(orderService, order ->
-                notificationPoller.publish(new NotificationPoller.NotificationEvent(
-                        "Order " + order.getId().substring(0, 8) + " is now " + order.getStatus())));
+                notificationPoller.publish(new OrderStatusNotification(order)));
         autoSaveService = new AutoSaveService(storage);
         reportGenerator = new ReportGenerator(reportService);
     }
@@ -67,6 +69,7 @@ public class AppContext {
         notificationPoller.start(3000);
         orderStatusSimulator.start(15);
         autoSaveService.start(30);
+        ExchangeRateFetcher.getInstance().start();
     }
 
     public void shutdownBackgroundServices() {
@@ -75,5 +78,6 @@ public class AppContext {
         notificationPoller.stop();
         autoSaveService.stop();
         reportGenerator.shutdown();
+        ExchangeRateFetcher.getInstance().stop();
     }
 }

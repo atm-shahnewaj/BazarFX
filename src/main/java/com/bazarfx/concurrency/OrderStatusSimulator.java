@@ -34,7 +34,7 @@ public class OrderStatusSimulator {
 
     /** Ticks every {@code intervalSeconds}, advancing every in-progress order by one status. */
     public void start(long intervalSeconds) {
-        scheduler.scheduleAtFixedRate(this::tick, intervalSeconds, intervalSeconds, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(this::tick, 5, intervalSeconds, TimeUnit.SECONDS);
     }
 
     private void tick() {

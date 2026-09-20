@@ -1,5 +1,6 @@
 package com.bazarfx.concurrency;
 
+import com.bazarfx.notification.AppNotification;
 import javafx.application.Platform;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -7,28 +8,24 @@ import java.util.function.Consumer;
 
 /**
  * Long-lived daemon Thread that polls a local event queue every few seconds for new
- * orders, status changes, incoming reviews, and wishlist price-drops, then hands each
- * event to the UI safely via Platform.runLater() — the boundary between a worker thread
- * and the JavaFX Application Thread.
+ * orders, status changes, incoming chat messages, and new listings, then hands each
+ * event to the UI safely via Platform.runLater() - the boundary between a worker thread
+ * and the JavaFX Application Thread. Events are typed as the polymorphic AppNotification
+ * base class so any new notification kind "just works" without touching this class.
  */
 public class NotificationPoller {
 
-    public static class NotificationEvent {
-        public final String message;
-        public NotificationEvent(String message) { this.message = message; }
-    }
-
-    private final ConcurrentLinkedQueue<NotificationEvent> queue = new ConcurrentLinkedQueue<>();
-    private final Consumer<NotificationEvent> onEvent;
+    private final ConcurrentLinkedQueue<AppNotification> queue = new ConcurrentLinkedQueue<>();
+    private final Consumer<AppNotification> onEvent;
     private volatile boolean running = false;
     private Thread pollerThread;
 
-    public NotificationPoller(Consumer<NotificationEvent> onEvent) {
+    public NotificationPoller(Consumer<AppNotification> onEvent) {
         this.onEvent = onEvent;
     }
 
     /** Any part of the app (services, other background threads) can push an event here. */
-    public void publish(NotificationEvent event) {
+    public void publish(AppNotification event) {
         queue.add(event);
     }
 
@@ -36,9 +33,9 @@ public class NotificationPoller {
         running = true;
         pollerThread = new Thread(() -> {
             while (running) {
-                NotificationEvent event;
+                AppNotification event;
                 while ((event = queue.poll()) != null) {
-                    NotificationEvent finalEvent = event;
+                    AppNotification finalEvent = event;
                     Platform.runLater(() -> onEvent.accept(finalEvent));
                 }
                 try {

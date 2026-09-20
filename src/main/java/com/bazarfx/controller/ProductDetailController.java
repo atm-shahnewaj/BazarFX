@@ -4,19 +4,26 @@ import com.bazarfx.AppContext;
 import com.bazarfx.model.Product;
 import com.bazarfx.model.User;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
 
 public class ProductDetailController {
 
     @FXML private StackPane photoBox;
     @FXML private ImageView photoView;
+    @FXML private javafx.scene.control.ScrollPane thumbStripScroll;
+    @FXML private HBox thumbStrip;
     @FXML private Label titleLabel;
     @FXML private Label priceLabel;
     @FXML private Label descriptionLabel;
@@ -64,40 +71,70 @@ public class ProductDetailController {
             sellerLabel.setText("Sold by " + seller.getUsername() + "  \u2014  " + ratingText);
         }
 
-        loadPhoto(product);
+        loadGallery(product);
     }
 
-    /** Shows the listing's first full-size photo if one is on disk; otherwise the photo
-     *  box collapses (managed=false) so no empty gap is left in the layout. Falls back
-     *  to the thumbnail if the original was somehow removed but the thumbnail remains. */
-    private void loadPhoto(Product product) {
-        Image image = firstLoadable(product.getPhotoPaths());
-        if (image == null) {
-            image = firstLoadable(product.getThumbnailPaths());
+    /** Bug fix: previously only the very first photo was ever shown, even when a listing
+     *  had several. This now shows every photo the listing has: the first one large, and
+     *  the rest (photos + any thumbnails that aren't just duplicates of a photo) as a
+     *  clickable strip beneath it that swaps the large image on click. */
+    private void loadGallery(Product product) {
+        List<String> allPaths = new ArrayList<>(new LinkedHashSet<>(product.getPhotoPaths()));
+        if (allPaths.isEmpty()) {
+            allPaths.addAll(new LinkedHashSet<>(product.getThumbnailPaths()));
         }
-        if (image != null) {
-            photoView.setImage(image);
-            photoBox.setManaged(true);
-            photoBox.setVisible(true);
-        } else {
-            photoBox.setManaged(false);
-            photoBox.setVisible(false);
+
+        thumbStrip.getChildren().clear();
+        Image first = null;
+
+        for (String path : allPaths) {
+            Image img = loadImage(path);
+            if (img == null) continue;
+            if (first == null) first = img;
+
+            ImageView thumb = new ImageView(img);
+            thumb.setFitWidth(84);
+            thumb.setFitHeight(64);
+            thumb.setPreserveRatio(false);
+            thumb.setSmooth(true);
+            thumb.getStyleClass().add("detail-thumb");
+            javafx.scene.shape.Rectangle tClip = new javafx.scene.shape.Rectangle(84, 64);
+            tClip.setArcWidth(12);
+            tClip.setArcHeight(12);
+            thumb.setClip(tClip);
+            StackPane thumbWrap = new StackPane(thumb);
+            thumbWrap.getStyleClass().add("detail-thumb-wrap");
+            thumbWrap.setPadding(new Insets(2));
+            Image finalImg = img;
+            thumbWrap.setOnMouseClicked(e -> photoView.setImage(finalImg));
+            thumbStrip.getChildren().add(thumbWrap);
         }
+
+        boolean hasAny = first != null;
+        photoBox.setManaged(hasAny);
+        photoBox.setVisible(hasAny);
+        if (hasAny) photoView.setImage(first);
+
+        boolean showStrip = thumbStrip.getChildren().size() > 1;
+        thumbStripScroll.setManaged(showStrip);
+        thumbStripScroll.setVisible(showStrip);
     }
 
-    private static Image firstLoadable(java.util.List<String> paths) {
-        for (String path : paths) {
-            if (path == null || path.isBlank()) continue;
-            File file = new File(path);
-            if (!file.exists()) continue;
-            try {
-                Image img = new Image(file.toURI().toString(), 640, 480, true, true, true);
-                if (!img.isError()) return img;
-            } catch (Exception ignored) {
-                // fall through to next candidate photo
+    private static Image loadImage(String path) {
+        if (path == null || path.isBlank()) return null;
+        try {
+            Image img;
+            if (path.startsWith("http://") || path.startsWith("https://")) {
+                img = new Image(path, 640, 480, true, true, true);
+            } else {
+                File file = new File(path);
+                if (!file.exists()) return null;
+                img = new Image(file.toURI().toString(), 640, 480, true, true, true);
             }
+            return img.isError() ? null : img;
+        } catch (Exception e) {
+            return null;
         }
-        return null;
     }
 
     @FXML
@@ -119,5 +156,21 @@ public class ProductDetailController {
             ctx.storage.saveUser(current);
         }
         statusLabel.setText("Saved to wishlist.");
+    }
+
+    @FXML
+    private void onMessageSeller() {
+        AppContext ctx = AppContext.get();
+        User current = ctx.authService.getCurrentUser();
+        if (current == null || product == null) return;
+
+        if (current.getId().equals(product.getSellerId())) {
+            statusLabel.setText("This is your own listing.");
+            return;
+        }
+
+        var loader = ctx.router.navigate("MessagesView.fxml");
+        MessagesController controller = loader.getController();
+        controller.openConversation(product.getId(), current.getId(), product.getSellerId());
     }
 }

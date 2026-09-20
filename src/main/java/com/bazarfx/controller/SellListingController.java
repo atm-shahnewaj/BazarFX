@@ -5,6 +5,7 @@ import com.bazarfx.model.Category;
 import com.bazarfx.model.Condition;
 import com.bazarfx.model.Product;
 import com.bazarfx.model.User;
+import com.bazarfx.notification.ListingPublishedNotification;
 import com.bazarfx.service.ProductService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -75,6 +76,7 @@ public class SellListingController {
 
         statusLabel.setText("Listing published! Processing photos in the background\u2026");
         ctx.searchIndex.rebuildAsync();
+        ctx.notificationPoller.publish(new ListingPublishedNotification(product));
 
         if (!selectedPhotos.isEmpty()) {
             ctx.imageProcessor.processAsync(product, new ArrayList<>(selectedPhotos), new com.bazarfx.concurrency.ImageProcessor.Callback() {

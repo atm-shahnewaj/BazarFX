@@ -8,8 +8,9 @@
            styleClass="auth-root">
     <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
 
-    <ScrollPane fitToWidth="true" styleClass="edge-to-edge" maxWidth="460">
-        <VBox alignment="CENTER" spacing="18">
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="edge-to-edge"
+                maxWidth="Infinity" maxHeight="Infinity" VBox.vgrow="ALWAYS">
+        <VBox alignment="CENTER" spacing="16" maxWidth="420">
             <padding><Insets top="18" right="4" bottom="18" left="4"/></padding>
 
             <StackPane styleClass="auth-logo-badge">
