@@ -169,10 +169,15 @@ public class BrowseController {
 
         private static Image tryLoad(String path) {
             if (path == null || path.isBlank()) return null;
-            File file = new File(path);
-            if (!file.exists()) return null;
             try {
-                Image img = new Image(file.toURI().toString(), 300, 300, true, true, true);
+                Image img;
+                if (path.startsWith("http://") || path.startsWith("https://")) {
+                    img = new Image(path, 300, 300, true, true, true);
+                } else {
+                    File file = new File(path);
+                    if (!file.exists()) return null;
+                    img = new Image(file.toURI().toString(), 300, 300, true, true, true);
+                }
                 return img.isError() ? null : img;
             } catch (Exception e) {
                 return null;

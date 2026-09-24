@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="16" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.bazarfx.controller.CartController">
+    <padding><Insets top="20" right="28" bottom="20" left="28"/></padding>
+
+    <VBox spacing="2" styleClass="page-header">
+        <Label text="Your Cart" styleClass="section-title"/>
+        <Label text="Review your items before checking out" styleClass="page-subtext"/>
+    </VBox>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="edge-to-edge">
+        <VBox fx:id="itemsBox" spacing="10"/>
+    </ScrollPane>
+
+    <HBox spacing="14" alignment="CENTER_RIGHT" styleClass="cart-total-bar">
+        <Label fx:id="totalLabel" styleClass="detail-price" HBox.hgrow="ALWAYS"/>
+        <Button text="Checkout" onAction="#onCheckout" styleClass="primary-button"/>
+    </HBox>
+</VBox>

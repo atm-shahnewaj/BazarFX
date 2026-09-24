@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="14" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.bazarfx.controller.BrowseController">
+    <padding><Insets top="18" right="24" bottom="18" left="24"/></padding>
+
+    <VBox spacing="2" styleClass="page-header">
+        <Label text="Browse Listings" styleClass="section-title"/>
+        <Label text="Search, filter and find something to buy near you" styleClass="page-subtext"/>
+    </VBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="filter-bar">
+        <TextField fx:id="searchField" promptText="Search listings..." HBox.hgrow="ALWAYS"/>
+        <ComboBox fx:id="categoryFilter" promptText="Category"/>
+        <ComboBox fx:id="conditionFilter" promptText="Condition"/>
+        <TextField fx:id="minPriceField" promptText="Min $" maxWidth="80"/>
+        <TextField fx:id="maxPriceField" promptText="Max $" maxWidth="80"/>
+        <ComboBox fx:id="sortBox" promptText="Sort by"/>
+        <Button text="Apply" onAction="#onApplyFilters" styleClass="primary-button"/>
+    </HBox>
+
+    <Label fx:id="resultCountLabel" styleClass="result-count"/>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="edge-to-edge">
+        <FlowPane fx:id="resultsPane" hgap="16" vgap="16"/>
+    </ScrollPane>
+</VBox>

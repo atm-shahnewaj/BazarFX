@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="16" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.bazarfx.controller.ReportsController">
+    <padding><Insets top="20" right="28" bottom="20" left="28"/></padding>
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <VBox spacing="2" styleClass="page-header">
+            <Label text="Marketplace Reports" styleClass="section-title"/>
+            <Label text="Aggregated stats across categories, sellers and weeks" styleClass="page-subtext"/>
+        </VBox>
+        <ProgressIndicator fx:id="progressIndicator" visible="false" prefWidth="24" prefHeight="24"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Regenerate" onAction="#onGenerate" styleClass="secondary-button"/>
+        <Button text="Export CSV" onAction="#onExport" styleClass="ghost-button"/>
+    </HBox>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="edge-to-edge">
+        <HBox spacing="20">
+            <VBox spacing="8" styleClass="report-column" HBox.hgrow="ALWAYS">
+                <Label text="Top Categories" styleClass="section-subtitle"/>
+                <VBox fx:id="categoriesBox" spacing="4"/>
+            </VBox>
+            <VBox spacing="8" styleClass="report-column" HBox.hgrow="ALWAYS">
+                <Label text="Top-Rated Sellers" styleClass="section-subtitle"/>
+                <VBox fx:id="sellersBox" spacing="4"/>
+            </VBox>
+            <VBox spacing="8" styleClass="report-column" HBox.hgrow="ALWAYS">
+                <Label text="Busiest Weeks" styleClass="section-subtitle"/>
+                <VBox fx:id="weeksBox" spacing="4"/>
+            </VBox>
+        </HBox>
+    </ScrollPane>
+
+    <Label fx:id="statusLabel" styleClass="status-label"/>
+</VBox>

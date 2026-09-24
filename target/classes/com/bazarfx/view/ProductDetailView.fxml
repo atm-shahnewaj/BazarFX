@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="14" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.bazarfx.controller.ProductDetailController"
+      styleClass="detail-root">
+    <padding><Insets top="20" right="28" bottom="20" left="28"/></padding>
+
+    <VBox spacing="10" styleClass="form-card" maxWidth="720">
+        <StackPane fx:id="photoBox" styleClass="detail-photo" managed="false" visible="false">
+            <ImageView fx:id="photoView" preserveRatio="true" smooth="true"/>
+        </StackPane>
+        <ScrollPane fx:id="thumbStripScroll" fitToHeight="true" hbarPolicy="AS_NEEDED" vbarPolicy="NEVER"
+                    styleClass="edge-to-edge" managed="false" visible="false">
+            <HBox fx:id="thumbStrip" spacing="10"/>
+        </ScrollPane>
+
+        <Label fx:id="titleLabel" styleClass="detail-title" wrapText="true"/>
+        <Label fx:id="priceLabel" styleClass="detail-price"/>
+        <Label fx:id="metaLabel" styleClass="detail-meta"/>
+        <Label fx:id="sellerLabel" styleClass="detail-seller"/>
+        <Label fx:id="viewCountLabel" styleClass="detail-views"/>
+        <Separator/>
+        <Label fx:id="descriptionLabel" wrapText="true" styleClass="detail-description"/>
+
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="Quantity:" styleClass="field-label"/>
+            <Spinner fx:id="quantitySpinner" editable="true" prefWidth="90"/>
+            <Button text="Add to Cart" onAction="#onAddToCart" styleClass="primary-button"/>
+            <Button text="Save to Wishlist" onAction="#onAddToWishlist" styleClass="secondary-button"/>
+            <Button text="💬 Message Seller" onAction="#onMessageSeller" styleClass="ghost-button"/>
+        </HBox>
+        <Label fx:id="statusLabel" styleClass="status-label"/>
+    </VBox>
+</VBox>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml" fx:controller="com.bazarfx.controller.LoginController"
+           styleClass="auth-root">
+    <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+    <VBox alignment="CENTER" spacing="22" maxWidth="420">
+        <StackPane styleClass="auth-logo-badge">
+            <Label text="B" styleClass="auth-logo-glyph"/>
+        </StackPane>
+        <VBox alignment="CENTER" spacing="4">
+            <Label text="BazarFX" styleClass="brand-title"/>
+            <Label text="Offline peer-to-peer marketplace" styleClass="brand-subtitle"/>
+        </VBox>
+
+        <VBox spacing="12" maxWidth="360" styleClass="auth-card">
+            <VBox spacing="4">
+                <Label text="USERNAME OR EMAIL" styleClass="field-label"/>
+                <TextField fx:id="usernameOrEmailField" promptText="e.g. newaj or you@example.com"/>
+            </VBox>
+            <VBox spacing="4">
+                <Label text="PASSWORD" styleClass="field-label"/>
+                <PasswordField fx:id="passwordField" promptText="Your password"/>
+            </VBox>
+            <Button text="Log In" onAction="#onLogin" defaultButton="true" maxWidth="Infinity" styleClass="primary-button"/>
+            <Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
+            <Separator/>
+            <Hyperlink text="Need an account? Sign up" onAction="#onGoToSignup" styleClass="auth-switch-link"/>
+        </VBox>
+    </VBox>
+</StackPane>

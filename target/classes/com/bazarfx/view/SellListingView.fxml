@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="14" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.bazarfx.controller.SellListingController"
+      styleClass="form-root">
+    <padding><Insets top="20" right="28" bottom="20" left="28"/></padding>
+
+    <VBox spacing="2" styleClass="page-header">
+        <Label text="Sell an Item" styleClass="section-title"/>
+        <Label text="Your listing goes live instantly; photos process in the background" styleClass="page-subtext"/>
+    </VBox>
+
+    <VBox spacing="12" styleClass="form-card" maxWidth="640">
+        <VBox spacing="4">
+            <Label text="TITLE" styleClass="field-label"/>
+            <TextField fx:id="titleField" promptText="What are you selling?"/>
+        </VBox>
+        <VBox spacing="4">
+            <Label text="DESCRIPTION" styleClass="field-label"/>
+            <TextArea fx:id="descriptionField" promptText="Describe the item's condition, features, etc." prefRowCount="4" wrapText="true"/>
+        </VBox>
+
+        <HBox spacing="12">
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="CATEGORY" styleClass="field-label"/>
+                <ComboBox fx:id="categoryBox" promptText="Category" maxWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="CONDITION" styleClass="field-label"/>
+                <ComboBox fx:id="conditionBox" promptText="Condition" maxWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="4">
+                <Label text="PRICE ($)" styleClass="field-label"/>
+                <TextField fx:id="priceField" promptText="0.00" maxWidth="120"/>
+            </VBox>
+        </HBox>
+
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <Button text="Choose Photos (up to 5)" onAction="#onChoosePhotos" styleClass="secondary-button"/>
+            <Label fx:id="photoCountLabel" text="0 photo(s) selected" styleClass="field-hint"/>
+        </HBox>
+
+        <Button text="Publish Listing" onAction="#onPublish" maxWidth="Infinity" styleClass="primary-button"/>
+        <Label fx:id="statusLabel" styleClass="status-label" wrapText="true"/>
+    </VBox>
+</VBox>

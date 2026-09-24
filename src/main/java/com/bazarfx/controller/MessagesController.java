@@ -4,7 +4,6 @@ import com.bazarfx.AppContext;
 import com.bazarfx.model.Message;
 import com.bazarfx.model.Product;
 import com.bazarfx.model.User;
-import com.bazarfx.notification.NewMessageNotification;
 import com.bazarfx.service.MessagingService;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -146,15 +145,15 @@ public class MessagesController {
         AppContext ctx = AppContext.get();
         User current = ctx.authService.getCurrentUser();
         try {
-            Message sent = ctx.messagingService.send(openProductId, openBuyerId, openSellerId, current.getId(), text);
+            ctx.messagingService.send(openProductId, openBuyerId, openSellerId, current.getId(), text);
             messageField.clear();
             renderMessages();
             refreshConversationList();
 
-            // Whoever isn't the sender would "receive" this in a networked app; here we
-            // simply demo the popup with the sender's own name, matching the same-machine
-            // account-switching workflow described for this feature.
-            ctx.notificationPoller.publish(new NewMessageNotification(sent, current.getUsername()));
+            // No toast here: this is the sender's own screen, and a "new message" popup
+            // is meant to alert the *recipient*, not echo back to whoever just sent it.
+            // On this single-machine demo the recipient will see it themselves the next
+            // time they log in as their account and open Messages.
         } catch (MessagingService.ValidationException ex) {
             // Ignore blank sends silently - the field itself prevents most of these.
         }
