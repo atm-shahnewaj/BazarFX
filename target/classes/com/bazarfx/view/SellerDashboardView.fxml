@@ -27,7 +27,7 @@
         </VBox>
     </HBox>
 
-    <Label text="My Listings" styleClass="section-subtitle, section-subtitle-on-bg"/>
+    <Label text="My Listings" styleClass="section-subtitle"/>
     <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="edge-to-edge">
         <VBox fx:id="listingsBox" spacing="10"/>
     </ScrollPane>

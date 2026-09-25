@@ -7,6 +7,8 @@
 
 .root {
     /* ---- palette (custom looked-up properties) ---- */
+    -bg-app-1: #fdf1ff;
+    -bg-app-2: #eef1ff;
     -surface: #ffffff;
     -surface-alt: #f6f3ff;
     -surface-border: #e7defb;
@@ -32,15 +34,7 @@
     -fx-font-family: "Segoe UI Semibold", "Segoe UI", "Inter", "Helvetica Neue", Arial, sans-serif;
     -fx-font-size: 14px;
     -fx-text-fill: -text-body;
-    /* App-wide background (previously scoped to just the auth screens via
-       .auth-root below) - every window/screen now shares this same backdrop.
-       Explicit backgrounds on the nav bar, cards, buttons, etc. all sit
-       visibly on top of this, unaffected. */
-    -fx-background-color:
-        radial-gradient(center 12% 8%, radius 55%, rgba(255,255,255,0.16), transparent),
-        radial-gradient(center 90% 12%, radius 50%, rgba(236,72,153,0.35), transparent),
-        radial-gradient(center 90% 88%, radius 60%, rgba(20,196,151,0.30), transparent),
-        linear-gradient(to bottom right, #2a0e57, #4c1d95 45%, #1e1b4b);
+    -fx-background-color: linear-gradient(to bottom right, -bg-app-1, -bg-app-2);
 }
 
 .label {
@@ -69,9 +63,13 @@
 .scroll-bar .increment-button, .scroll-bar .decrement-button { -fx-background-color: transparent; }
 
 /* ---------- Auth screens (Login / Signup) ---------- */
-/* .auth-root no longer needs its own background - it's now just .root's
-   app-wide background showing through (see .root above). Class kept on the
-   auth screen roots in case screen-specific auth styling is needed later. */
+.auth-root {
+    -fx-background-color:
+        radial-gradient(center 12% 8%, radius 55%, rgba(255,255,255,0.16), transparent),
+        radial-gradient(center 90% 12%, radius 50%, rgba(236,72,153,0.35), transparent),
+        radial-gradient(center 90% 88%, radius 60%, rgba(20,196,151,0.30), transparent),
+        linear-gradient(to bottom right, #2a0e57, #4c1d95 45%, #1e1b4b);
+}
 .auth-card {
     -fx-background-color: rgba(255,255,255,0.98);
     -fx-background-radius: 22;
@@ -350,7 +348,7 @@
     -fx-effect: dropshadow(gaussian, rgba(92,40,180,0.08), 12, 0, 0, 3);
 }
 .result-count {
-    -fx-text-fill: -text-on-dark-muted;
+    -fx-text-fill: -text-muted;
     -fx-font-size: 0.88em;
 }
 .product-card {
@@ -403,35 +401,19 @@
 .page-header {
     -fx-padding: 0 0 0.2em 0;
 }
-/* Page titles sit directly on the app background (not on a white card), so
-   they use the light-on-dark palette instead of -text-strong. */
 .section-title {
     -fx-font-size: 1.75em;
     -fx-font-weight: bold;
-    -fx-text-fill: -text-on-dark;
+    -fx-text-fill: -text-strong;
 }
-/* .section-subtitle is used both on white cards (report columns, chat panel
-   header) and directly on the app background (dashboard's "My Listings").
-   Keep the card-friendly dark color as the default... */
 .section-subtitle {
     -fx-font-size: 1.1em;
     -fx-font-weight: bold;
     -fx-text-fill: -text-strong;
 }
-/* ...and layer this on top (extra styleClass) for the instances that sit
-   straight on the app background instead of a card. */
-.section-subtitle-on-bg {
-    -fx-text-fill: -text-on-dark;
-}
-/* Same story for page-subtext: on the app background almost everywhere,
-   except the Messages empty-state hint which lives inside the white
-   chat-panel card (see .page-subtext-on-card below). */
 .page-subtext {
-    -fx-text-fill: -text-on-dark-muted;
-    -fx-font-size: 0.92em;
-}
-.page-subtext-on-card {
     -fx-text-fill: -text-muted;
+    -fx-font-size: 0.92em;
 }
 .form-card, .detail-card {
     -fx-background-color: -surface;

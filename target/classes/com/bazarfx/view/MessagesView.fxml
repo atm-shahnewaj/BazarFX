@@ -25,7 +25,7 @@
                 </VBox>
             </ScrollPane>
             <Label fx:id="emptyStateLabel" text="Open a conversation on the left, or message a seller from any listing."
-                   styleClass="page-subtext, page-subtext-on-card" wrapText="true"/>
+                   styleClass="page-subtext" wrapText="true"/>
             <HBox spacing="10" alignment="CENTER">
                 <TextField fx:id="messageField" promptText="Type a message…" HBox.hgrow="ALWAYS" onAction="#onSend"/>
                 <Button fx:id="sendButton" text="Send" onAction="#onSend" styleClass="primary-button"/>
